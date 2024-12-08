@@ -30,6 +30,11 @@ public:
                 _suite  = suite;
             }
             
+            bool operator==(const Deck::Card& card2){
+                if( card2._number == this->_number && card2._suite == this->_suite ) return true;
+                return false;
+            }
+            
             inline std::string name(){ return numToVal() + _suite; }
             inline std::string suite() { return _suite; }
             inline int num() { return _number; }
@@ -69,9 +74,9 @@ public:
     
     Deck& operator -=(Deck::Card card){
         //FIND IF CARD PRESENT, IF IT IS DELETE IT FROM CardDeck
-        //if( std::find(CardDeck.begin(), end(), card) != CardDeck.end()){
-        //    to.CardDeck.push_back(std::move(card));
-        //}
+        if( std::find(CardDeck.begin(), CardDeck.end(), card) != CardDeck.end()){
+            CardDeck.erase(std::find(CardDeck.begin(), CardDeck.end(), card));
+        }
         return *this;
     }
     
