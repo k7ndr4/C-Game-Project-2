@@ -83,12 +83,29 @@ public:
         else{
             //ENEMY AI HERE
         }
+        
+        //MAKE SURE BOTH DECKS HAVE ATLEAST 4 CARDS
+        if(_PlayerDeck->Size() < _PLAYER_HANDSIZE){
+            TakeFromDeck(_GameDeck, _PlayerDeck, _GameDeck->GetRandomCard());
+        }
+        
+        if(_EnemyDeck->Size() < _PLAYER_HANDSIZE){
+            TakeFromDeck(_GameDeck, _EnemyDeck, _GameDeck->GetRandomCard());
+        }
+    }
+    
+    void DisplayHand(Deck* deck){
+        //DISPLAY THE HAND OF THE PLAYER TO THE PLAYER
+        std::cout << "\nYour current hand:\n";
+        _PlayerDeck->PrintDeck(2);
     }
     
     //GAMEPLAY LOOP
     void StartGame(){
         //INITIALIZE 'checkNum' WITH -1 SO YOU CANT ACCIDENTLY WIN THE GAME OFF START
         int checkNum = -1;
+        
+        //CHECK FOR WIN CONDITIONS IN WHILE LOOP
         while(!CheckFour(_PlayerDeck,checkNum) || !CheckFour(_EnemyDeck, checkNum)){
             PromptTurn(_turn++);
         }
@@ -96,6 +113,7 @@ public:
     
 private:
     const int _WINCON = 4;
+    const int _PLAYER_HANDSIZE = 4;
     
     Deck* _GameDeck = nullptr;
     Deck* _PlayerDeck = nullptr;

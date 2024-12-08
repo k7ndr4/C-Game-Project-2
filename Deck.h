@@ -106,9 +106,18 @@ public:
         }
     }
     
-    void PrintDeck(){
-        for(Deck::Card &card: CardDeck){
-            std::cout << card.name() << '\n';
+    void PrintDeck(int format = 1){
+        switch(format){
+            case 1: 
+                for(Deck::Card &card: CardDeck){
+                    std::cout << card.name() << '\n';
+                }
+                break;
+            
+            case 2: 
+                for(Deck::Card &card: CardDeck){
+                    std::cout << card.name() << ", ";
+                }
         }
     }
     
