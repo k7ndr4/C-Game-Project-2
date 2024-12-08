@@ -33,10 +33,8 @@ int main(int argc, char** argv) {
     
     //GAME MANAGER
     GoFish GameManager(GameDeck, PlayerDeck, EnemyDeck, Pile);
-    GameManager.TakeFromDeck(GameDeck, PlayerDeck, GameDeck.GetRandomCard());
     
-    PlayerDeck.PrintDeck();
-    cout << "\n\n\n";
+    GameDeck.Shuffle();
     GameDeck.PrintDeck();
     
     return 0;

@@ -103,10 +103,13 @@ public:
         }
     }
     
+    void Shuffle(){
+        std::shuffle(CardDeck.begin(), CardDeck.end(), std::default_random_engine(time(0)))
+;    }
+    
     Deck::Card& GetRandomCard(){
         return CardDeck.at(rand()% _size);
     }
-    
     
 private:
     int _size{};
