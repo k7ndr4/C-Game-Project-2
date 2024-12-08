@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=Cygwin-Windows
 CND_ARTIFACT_DIR_Debug=dist/Debug/Cygwin-Windows
-CND_ARTIFACT_NAME_Debug=cis5_netbeans_game_project_1
-CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin-Windows/cis5_netbeans_game_project_1
+CND_ARTIFACT_NAME_Debug=c-game-project-2
+CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin-Windows/c-game-project-2
 CND_PACKAGE_DIR_Debug=dist/Debug/Cygwin-Windows/package
-CND_PACKAGE_NAME_Debug=cis5netbeansgameproject1.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin-Windows/package/cis5netbeansgameproject1.tar
+CND_PACKAGE_NAME_Debug=c-game-project-2.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin-Windows/package/c-game-project-2.tar
 # Release configuration
 CND_PLATFORM_Release=Cygwin-Windows
 CND_ARTIFACT_DIR_Release=dist/Release/Cygwin-Windows
-CND_ARTIFACT_NAME_Release=cis5_netbeans_game_project_1
-CND_ARTIFACT_PATH_Release=dist/Release/Cygwin-Windows/cis5_netbeans_game_project_1
+CND_ARTIFACT_NAME_Release=c-game-project-2
+CND_ARTIFACT_PATH_Release=dist/Release/Cygwin-Windows/c-game-project-2
 CND_PACKAGE_DIR_Release=dist/Release/Cygwin-Windows/package
-CND_PACKAGE_NAME_Release=cis5netbeansgameproject1.tar
-CND_PACKAGE_PATH_Release=dist/Release/Cygwin-Windows/package/cis5netbeansgameproject1.tar
+CND_PACKAGE_NAME_Release=c-game-project-2.tar
+CND_PACKAGE_PATH_Release=dist/Release/Cygwin-Windows/package/c-game-project-2.tar
 #
 # include compiler specific variables
 #
