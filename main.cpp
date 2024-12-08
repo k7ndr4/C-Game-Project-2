@@ -36,6 +36,12 @@ int main(int argc, char** argv) {
     
     GameDeck->Shuffle();
     
+    //DELETE POINTERS
+    delete GameDeck;
+    delete PlayerDeck;
+    delete EnemyDeck;
+    delete Pile;
+    
     return 0;
 }
 

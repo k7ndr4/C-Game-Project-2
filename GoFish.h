@@ -24,6 +24,13 @@ public:
         _Pile = Pile;
     }
     
+    ~GoFish(){
+        delete _GameDeck;
+        delete _PlayerDeck;
+        delete _EnemyDeck;
+        delete _Pile;
+    }
+    
     //CHECKS THE WIN CONDITION
     bool CheckFour(Deck* deck, int num){
         if( std::count(deck->CardDeck.begin(), deck->CardDeck.end(), num) == _WINCON){
