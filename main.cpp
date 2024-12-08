@@ -22,19 +22,20 @@ int main(int argc, char** argv) {
     srand(time(0));
     
     //MAKE THE GAME DECK
-    Deck GameDeck;
-    GameDeck.CreateRandomDeck();
+    Deck* GameDeck = new Deck;
+    GameDeck->CreateRandomDeck();
     //GameDeck.PrintDeck();
     
     //PLAYER DECK, ENEMY DECK, & PILE
-    Deck PlayerDeck;
-    Deck EnemyDeck;
-    Deck Pile;
+    Deck* PlayerDeck = new Deck;
+    Deck* EnemyDeck = new Deck;
+    Deck* Pile = new Deck;
     
     //GAME MANAGER
     GoFish GameManager(GameDeck, PlayerDeck, EnemyDeck, Pile);
     
-    GameDeck.Shuffle();
+    GameDeck->Shuffle();
+    
     return 0;
 }
 

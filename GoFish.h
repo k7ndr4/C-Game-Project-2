@@ -17,34 +17,40 @@
 
 class GoFish{
 public:
-    GoFish(Deck& GameDeck, Deck& PlayerDeck, Deck& EnemyDeck, Deck& Pile){
-        
+    GoFish(Deck* GameDeck, Deck* PlayerDeck, Deck* EnemyDeck, Deck* Pile){
+        _GameDeck = GameDeck;
+        _PlayerDeck = PlayerDeck;
+        _EnemyDeck = EnemyDeck;
+        _Pile = Pile;
     }
     
-    bool CheckFour(Deck& deck, int num){
-        if( std::count(deck.CardDeck.begin(), deck.CardDeck.end(), num) == _WINCON){
+    //CHECKS THE WIN CONDITION
+    bool CheckFour(Deck* deck, int num){
+        if( std::count(deck->CardDeck.begin(), deck->CardDeck.end(), num) == _WINCON){
             std::cout << "\nPLAYER _ WON!!!!";
             return true;
         }
         return false;
     }
     
-    void TakeFromDeck(Deck& from, Deck& to, Deck::Card card){
-        if( std::find(from.CardDeck.begin(), from.CardDeck.end(), card) != from.CardDeck.end()){
-            to += card;
-            from -= card;
+    //FIND A CARD OBJECT, FIND IT FROM A DECK. ADD IT TO 'to' DECK, REMOVE CARD FROM 'from' DECK
+    void TakeFromDeck(Deck* from, Deck* to, Deck::Card card){
+        if( std::find(from->CardDeck.begin(), from->CardDeck.end(), card) != from->CardDeck.end()){
+            *to += card;
+            *from -= card;
         }
     }
     
-    void WhileTakeFromDeck(Deck& from, Deck& to, int num){
-        auto itr = std::find(from.CardDeck.begin(), from.CardDeck.end(), num);
+    void WhileTakeFromDeck(Deck* from, Deck* to, int num){
+        auto itr = std::find(from->CardDeck.begin(), from->CardDeck.end(), num);
         
         //WHILE THAT NUMBER OF CARD CAN BE FOUND IN A DECK,
-        while(itr != from.CardDeck.end()){
+        while(itr != from->CardDeck.end()){
             //ADD THAT CARD TO THE 'to' DECK, AND REMOVE IT FROM THE 'from' DECK
-            to.CardDeck.push_back(from.ReturnAndRemove(num));
+            to->CardDeck.push_back(from->ReturnAndRemove(num));
             
-            itr = std::find(itr++, from.CardDeck.end(), num);
+            //ADVANCE THE ITERATOR
+            itr = std::find(itr++, from->CardDeck.end(), num);
         }
     }
     
@@ -54,6 +60,10 @@ public:
     
 private:
     const int _WINCON = 4;
+    Deck* _GameDeck = nullptr;
+    Deck* _PlayerDeck = nullptr;
+    Deck* _EnemyDeck = nullptr;
+    Deck* _Pile = nullptr;
 };
 
 
