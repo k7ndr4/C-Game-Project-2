@@ -13,17 +13,103 @@
 #ifndef DECK_H
 #define DECK_H
 
+#include <vector>
+#include <string>
+#include <random>
+#include <cmath>
+#include <cstdlib>
+#include <iostream>
+#include <algorithm>
+
 class Deck{
-public:
+public: 
+    struct Card{
+        public:
+            Card(int num, std::string suite){
+                _number = num;
+                _suite  = suite;
+            }
+            
+            inline std::string name(){ return numToVal() + _suite; }
+            inline std::string suite() { return _suite; }
+            inline int num() { return _number; }
+            
+        private:
+            int _number{}; //PHYSICAL CARD NUMBER, ANYTHING ABOVE 10 CORRELATES TO THE FACE CARDS. (i.e JOKER = 11, QUEEN = 12, KING = 13}
+            std::string _suite{};
+            
+            inline std::string numToVal(){
+                if(_number == 1) return "Ace";
+                if(_number <=10) return std::to_string(_number);
+                switch(_number){
+                    case 11: return "Jack";
+                    case 12: return "Queen";
+                    case 13: return "King";
+                    default: return "Jack";
+                }
+            }
+    };
+    
+    Deck(int size){
+        //call some function to create cards based on a const array of numbers&suites
+        _size = size;
+        CardDeck.reserve(size);
+    }
+    
     Deck(){
         //call some function to create cards based on a const array of numbers&suites
+        _size = 52;
+        CardDeck.reserve(52);
+    }
+    
+    Deck& operator +=(Deck::Card card){
+        CardDeck.push_back(card);
+        return *this;
+    }
+    
+    Deck& operator -=(Deck::Card card){
+        //FIND IF CARD PRESENT, IF IT IS DELETE IT FROM CardDeck
+        //if( std::find(CardDeck.begin(), end(), card) != CardDeck.end()){
+        //    to.CardDeck.push_back(std::move(card));
+        //}
+        return *this;
     }
     
     
+    
+    //THE DECK ITSELF
+    std::vector<Deck::Card> CardDeck{};
+    
+    //GETTERS
+    inline int Size(){ return _size; }
+    
+    //PUBLIC FUNCS
+    void CreateRandomDeck(){
+        for(int i = 0; i < 4; ++i){
+            for(int j = 1; j <= 13; ++j){
+                CardDeck.emplace_back(j, SUITES.at(i));
+            }
+        }
+    }
+    
+    void PrintDeck(){
+        for(Deck::Card card: CardDeck){
+            std::cout << card.name() << '\n';
+        }
+    }
+    
+    
+    
 private:
-    //vars
-    //num of cards in deck
-    //predetermined arrays of suites&nums
+    int _size{};
+    
+    const std::vector<std::string> SUITES = { 
+        " of Spades", 
+        " of Hearts", 
+        " of Clubs", 
+        " of Diamonds" 
+    };
+    
     
     //FUNCTIONS
     //create deck func
