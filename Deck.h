@@ -49,7 +49,7 @@ public:
             }
             
             bool operator<(const Deck::Card& card2){
-                return card2._number > this->_number;
+                return card2._number < this->_number;
             }
             
             bool operator>=(const Deck::Card& card2){
@@ -57,7 +57,7 @@ public:
             }
             
             bool operator<=(const Deck::Card& card2){
-                return card2._number >= this->_number;
+                return card2._number <= this->_number;
             }
             
             inline std::string name(){ return numToVal() + _suite; }
