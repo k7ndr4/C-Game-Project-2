@@ -48,6 +48,7 @@ public:
         }
     }
     
+    //FIND A CARD NUMBER, KEEP TAKING FROM THE DECK UNTIL IT IS NO LONGER PRESENT
     void WhileTakeFromDeck(Deck* from, Deck* to, int num){
         auto itr = std::find(from->CardDeck.begin(), from->CardDeck.end(), num);
         
@@ -61,16 +62,49 @@ public:
         }
     }
     
-    void PromptTurn(){
+    //GAMEPLAY TURN
+    void PromptTurn(int turn){
+        std::cout << "\n----TURN " << turn << " ----\n";
         
+        //TURNS WILL BE DECIDED BASED ON MODULUS 2
+        //i.e EVEN TURNS WILL BE THE ENEMY TURN, ODD WILL BE PLAYER
+        //IF THE TURN IS EVEN, (IF IT IS THE PLAYERS TURN)
+        if(turn % 2 == 0){
+            //PROMPT THE PLAYER TO TAKE A CARD
+            std::cout << "It's your turn! Enter a card number that you want to fish for.\n";
+            
+            int num{};
+            std::cin >> num;
+            
+            WhileTakeFromDeck(_EnemyDeck, _PlayerDeck, num);
+        }
+        
+        //IF THE TURN IS ODD, (IT'S THE ENEMYS TURN)
+        else{
+            //ENEMY AI HERE
+        }
+    }
+    
+    //GAMEPLAY LOOP
+    void StartGame(){
+        //INITIALIZE 'checkNum' WITH -1 SO YOU CANT ACCIDENTLY WIN THE GAME OFF START
+        int checkNum = -1;
+        while(!CheckFour(_PlayerDeck,checkNum) || !CheckFour(_EnemyDeck, checkNum)){
+            PromptTurn(_turn++);
+        }
     }
     
 private:
     const int _WINCON = 4;
+    
     Deck* _GameDeck = nullptr;
     Deck* _PlayerDeck = nullptr;
     Deck* _EnemyDeck = nullptr;
     Deck* _Pile = nullptr;
+    
+    int _turn = 1;
+    
+    bool _gameStarted = false;
 };
 
 
