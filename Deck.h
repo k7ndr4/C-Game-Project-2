@@ -25,6 +25,10 @@ class Deck{
 public: 
     struct Card{
         public:
+            Card(){
+                
+            }
+            
             Card(int num, std::string suite){
                 _number = num;
                 _suite  = suite;
@@ -32,6 +36,11 @@ public:
             
             bool operator==(const Deck::Card& card2){
                 if( card2._number == this->_number && card2._suite == this->_suite ) return true;
+                return false;
+            }
+            
+            bool operator==(const int num){
+                if(num == this->_number) return true;
                 return false;
             }
             
@@ -107,8 +116,16 @@ public:
         std::shuffle(CardDeck.begin(), CardDeck.end(), std::default_random_engine(time(0)))
 ;    }
     
-    Deck::Card& GetRandomCard(){
+    Deck::Card GetRandomCard(){
         return CardDeck.at(rand()% _size);
+    }
+    
+    Deck::Card& ReturnAndRemove(int num){
+        if(std::find(CardDeck.begin(), CardDeck.end(), num) != CardDeck.end()){
+            //Deck::Card card;
+            //card = CardDeck.at(std::distance(CardDeck.begin(), std::find(CardDeck.begin(), CardDeck.end(), num)));
+           // return card;
+        }
     }
     
 private:

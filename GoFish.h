@@ -22,6 +22,10 @@ public:
     }
     
     bool CheckFour(Deck& deck, int num){
+        if( std::count(deck.CardDeck.begin(), deck.CardDeck.end(), num) == _WINCON){
+            std::cout << "\nPLAYER _ WON!!!!";
+            return true;
+        }
         return false;
     }
     
@@ -31,6 +35,18 @@ public:
             from -= card;
         }
     }
+    
+    void WhileTakeFromDeck(Deck& from, Deck& to, int num){
+        while(std::find(from.CardDeck.begin(), from.CardDeck.end(), num) != from.CardDeck.end()){
+            //to +=
+            //from -=
+        }
+    }
+    
+    void PromptTurn(){
+        
+    }
+    
 private:
     const int _WINCON = 4;
 };
