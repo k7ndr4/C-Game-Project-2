@@ -120,12 +120,17 @@ public:
         return CardDeck.at(rand()% _size);
     }
     
-    Deck::Card& ReturnAndRemove(int num){
+    Deck::Card ReturnAndRemove(int num){
         if(std::find(CardDeck.begin(), CardDeck.end(), num) != CardDeck.end()){
-            //Deck::Card card;
-            //card = CardDeck.at(std::distance(CardDeck.begin(), std::find(CardDeck.begin(), CardDeck.end(), num)));
-           // return card;
+            Deck::Card card = CardDeck.at(std::distance(CardDeck.begin(), std::find(CardDeck.begin(), CardDeck.end(), num)));
+            
+            if(std::find(CardDeck.begin(), CardDeck.end(), card) != CardDeck.end())
+                CardDeck.erase(std::find(CardDeck.begin(), CardDeck.end(), card));
+            
+            return card;
         }
+        Deck::Card errorCard;
+        return errorCard;
     }
     
 private:
@@ -140,12 +145,7 @@ private:
     
     
     //FUNCTIONS
-    //create deck func
-    //shuffle deck func
-    //check deck for card func
     //check deck for number of card type (int num) => num occur.
-    //add to deck
-    //remove from the deck
 };
 
 

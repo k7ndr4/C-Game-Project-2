@@ -35,8 +35,6 @@ int main(int argc, char** argv) {
     GoFish GameManager(GameDeck, PlayerDeck, EnemyDeck, Pile);
     
     GameDeck.Shuffle();
-    GameDeck.PrintDeck();
-    
     return 0;
 }
 

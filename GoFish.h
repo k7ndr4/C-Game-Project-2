@@ -37,9 +37,14 @@ public:
     }
     
     void WhileTakeFromDeck(Deck& from, Deck& to, int num){
-        while(std::find(from.CardDeck.begin(), from.CardDeck.end(), num) != from.CardDeck.end()){
-            //to +=
-            //from -=
+        auto itr = std::find(from.CardDeck.begin(), from.CardDeck.end(), num);
+        
+        //WHILE THAT NUMBER OF CARD CAN BE FOUND IN A DECK,
+        while(itr != from.CardDeck.end()){
+            //ADD THAT CARD TO THE 'to' DECK, AND REMOVE IT FROM THE 'from' DECK
+            to.CardDeck.push_back(from.ReturnAndRemove(num));
+            
+            itr = std::find(itr++, from.CardDeck.end(), num);
         }
     }
     
