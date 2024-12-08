@@ -20,16 +20,24 @@ using namespace std;
 
 int main(int argc, char** argv) {
     srand(time(0));
-        
+    
     //MAKE THE GAME DECK
     Deck GameDeck;
     GameDeck.CreateRandomDeck();
-    GameDeck.PrintDeck();
+    //GameDeck.PrintDeck();
     
     //PLAYER DECK, ENEMY DECK, & PILE
     Deck PlayerDeck;
     Deck EnemyDeck;
     Deck Pile;
+    
+    //GAME MANAGER
+    GoFish GameManager(GameDeck, PlayerDeck, EnemyDeck, Pile);
+    GameManager.TakeFromDeck(GameDeck, PlayerDeck, GameDeck.GetRandomCard());
+    
+    PlayerDeck.PrintDeck();
+    cout << "\n\n\n";
+    GameDeck.PrintDeck();
     
     return 0;
 }

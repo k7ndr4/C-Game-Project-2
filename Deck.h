@@ -98,11 +98,14 @@ public:
     }
     
     void PrintDeck(){
-        for(Deck::Card card: CardDeck){
+        for(Deck::Card &card: CardDeck){
             std::cout << card.name() << '\n';
         }
     }
     
+    Deck::Card& GetRandomCard(){
+        return CardDeck.at(rand()% _size);
+    }
     
     
 private:

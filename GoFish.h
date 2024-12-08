@@ -22,18 +22,14 @@ public:
     }
     
     bool CheckFour(Deck& deck, int num){
-//        if( std::count(deck.CardDeck.begin(), deck.CardDeck.end(), num) ==  _WINCON){
-//            //victory
-//            return true;
-//        }
-//        
         return false;
     }
     
-    void TakeFromDeck(Deck& from, Deck& to, Deck::Card& card){
-        //if( std::find(from.CardDeck.begin(), from.CardDeck.end(), card) != from.CardDeck.end()){
-        //    to.CardDeck.push_back(std::move(card));
-        //}
+    void TakeFromDeck(Deck& from, Deck& to, Deck::Card card){
+        if( std::find(from.CardDeck.begin(), from.CardDeck.end(), card) != from.CardDeck.end()){
+            to += card;
+            from -= card;
+        }
     }
 private:
     const int _WINCON = 4;
