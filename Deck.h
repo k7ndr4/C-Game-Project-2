@@ -44,6 +44,22 @@ public:
                 return false;
             }
             
+            bool operator>(const Deck::Card& card2){
+                return card2._number > this->_number;
+            }
+            
+            bool operator<(const Deck::Card& card2){
+                return card2._number > this->_number;
+            }
+            
+            bool operator>=(const Deck::Card& card2){
+                return card2._number >= this->_number;
+            }
+            
+            bool operator<=(const Deck::Card& card2){
+                return card2._number >= this->_number;
+            }
+            
             inline std::string name(){ return numToVal() + _suite; }
             inline std::string suite() { return _suite; }
             inline int num() { return _number; }
@@ -95,7 +111,7 @@ public:
     std::vector<Deck::Card> CardDeck{};
     
     //GETTERS
-    inline int Size(){ return _size; }
+    inline int Size(){ return CardDeck.size(); }
     
     //PUBLIC FUNCS
     void CreateRandomDeck(){
@@ -122,11 +138,15 @@ public:
     }
     
     void Shuffle(){
-        std::shuffle(CardDeck.begin(), CardDeck.end(), std::default_random_engine(time(0)))
-;    }
+        std::shuffle(CardDeck.begin(), CardDeck.end(), std::default_random_engine(time(0)));
+    }
+    
+    void Sort(){
+        std::sort(CardDeck.begin(), CardDeck.end());
+    }
     
     Deck::Card GetRandomCard(){
-        return CardDeck.at(rand()% _size);
+        return CardDeck.at(rand()% CardDeck.size());
     }
     
     Deck::Card ReturnAndRemove(int num){

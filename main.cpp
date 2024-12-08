@@ -34,9 +34,7 @@ int main(int argc, char** argv) {
     //GAME MANAGER
     GoFish GameManager(GameDeck, PlayerDeck, EnemyDeck, Pile);
     
-    GameDeck->Shuffle();
-    GameManager.WhileTakeFromDeck(GameDeck, PlayerDeck, 7);
-    GameManager.DisplayHand(PlayerDeck);
+    GameManager.StartGame();
     
     return 0;
 }
