@@ -92,7 +92,7 @@ public:
     
     //GAMEPLAY TURN
     void PromptTurn(int turn, int& checkNum){
-        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        std::this_thread::sleep_for(std::chrono::milliseconds(250));
         std::cout << "\n----TURN " << turn << " ----\n";
         _PlayerDeck->Sort();
         
@@ -163,6 +163,7 @@ public:
         _EnemyDeck->CardDeck.clear();
         _Pile->CardDeck.clear();
         
+        _GameDeck->CreateRandomDeck();
         _GameDeck->Shuffle();
         
         //HAND BOTH DECKS '_PLAYER_HANDSIZE' RANDOM CARDS EACH
@@ -189,20 +190,20 @@ public:
             //player won
             std::cout << "\nYOU WON!!!\nCONGRATULATIONS. Points: " << _points << "\n\n";
             
-            _GameLogs << "Player Won.\nPoints: " << _points << '\n';
+            //_GameLogs << "Player Won.\nPoints: " << _points << '\n';
         }else if(_playerBooks < _enemyBooks){
             //enemy won
             std::cout << "\nYOU LOST!\nBETTER LUCK NEXT TIME. Points: " << _points << "\n\n";
             
-            _GameLogs << "Enemy Won.\n";
+            //_GameLogs << "Enemy Won.\n";
         }else{
             //tied
             std::cout << "\nTIED GAME!\nRARE OCCURANCE. Points: " << _points << "\n\n";
             
-            _GameLogs << "Tied Game.\nPoints: " << _points << '\n';
+            //_GameLogs << "Tied Game.\nPoints: " << _points << '\n';
         }
         
-        _GameLogs.close();
+        //_GameLogs.close();
     }
     
     void MainMenu(){
@@ -242,7 +243,7 @@ public:
     //GAMEPLAY LOOP
     void StartGame(){
         std::cout << "\nStarting Game...\n\n";
-        _GameLogs << "\nGame Session Started : " << ymd;
+        //_GameLogs << "\nGame Session Started : " << ymd;
         
         //RESET DECKS TO ENSURE NO BUGS
         ResetDecks();
@@ -251,9 +252,9 @@ public:
         int checkNum = -1;
         
         //CHECK FOR GAME CONDITIONS IN WHILE LOOP
-        //while(_GameDeck->Size() > 0){
-        //    PromptTurn(_turn++, checkNum);
-        //}
+        while(_GameDeck->Size() > 0){
+            PromptTurn(_turn++, checkNum);
+        }
         
         //CHECK WHO WON, DISPLAY VICTORY & RECORD LOGS
         DisplayVictory();
@@ -265,8 +266,8 @@ public:
     //MOVE ALL HEADER FUNCTIONS TO .CPP FILES
     
 private:
-    const std::chrono::time_point now{std::chrono::system_clock::now()};
-    const std::chrono::year_month_day ymd{std::chrono::floor<std::chrono::days>(now)};
+    //const std::chrono::time_point now{std::chrono::system_clock::now()};
+    //const std::chrono::year_month_day ymd{std::chrono::floor<std::chrono::days>(now)};
     
     const int _FOUROFKIND = 4;
     const int _PLAYER_HANDSIZE = 7;
@@ -284,7 +285,7 @@ private:
     
     bool _gameStarted = false;
     
-    std::ofstream _GameLogs("gameLogs.txt");
+    //std::ofstream _GameLogs("gameLogs.txt");
 };
 
 
