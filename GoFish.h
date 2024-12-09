@@ -104,12 +104,18 @@ public:
             DisplayHand(_PlayerDeck);
             std::cout << "\nIt's your turn! Enter a card number that you want to fish for: ";
             
-            int num{};
+            char num{};
             std::cin >> num;
-            checkNum = num;
+            
+            //USER VALIDATION
+            if(num > 13) num = 13;
+            else if(num < 1) num = 1;
+
+            if(isdigit(num)) checkNum = num;
+            else checkNum = 1;
             
             //TAKE THE REQUESTED CARD
-            if(!WhileTakeFromDeck(_EnemyDeck, _PlayerDeck, num)){
+            if(!WhileTakeFromDeck(_EnemyDeck, _PlayerDeck, checkNum)){
                 //GO FISH
                 std::cout << "\nGo Fish!\n";
                 Deck::Card tempCard = _GameDeck->GetRandomCard();
@@ -118,7 +124,7 @@ public:
             }
             
             //CHECK FOR BOOKS
-            if(CheckFour(_PlayerDeck,checkNum)){
+            if(CheckFour(_PlayerDeck)){
                 std::cout << "\nYou have 4 " << checkNum << "'s! These cards will be removed from your hand, and your # of books will go up by 1.\n";
                 
                 WhileTakeFromDeck(_PlayerDeck, _Pile, checkNum);
@@ -145,7 +151,7 @@ public:
                 TakeFromDeck(_GameDeck, _EnemyDeck, tempCard, 0);
             }
             
-            if(CheckFour(_EnemyDeck,enemyFish)){
+            if(CheckFour(_EnemyDeck)){
                 std::cout << "\nYour opponent has 4 " << enemyFish << "'s! These cards will be removed from their hand, and their # of books will go up by 1.\n";
                 
                 WhileTakeFromDeck(_EnemyDeck, _Pile, enemyFish);
@@ -254,6 +260,16 @@ public:
         //CHECK FOR GAME CONDITIONS IN WHILE LOOP
         while(_GameDeck->Size() > 0){
             PromptTurn(_turn++, checkNum);
+            
+            //CHECK FOR BOOKS AFTER DECK IS EMPTY
+            if(CheckFour(_PlayerDeck,checkNum)){
+                std::cout << "\nYou have 4 " << checkNum << "'s! These cards will be removed from your hand, and your # of books will go up by 1.\n";
+                
+                WhileTakeFromDeck(_PlayerDeck, _Pile, checkNum);
+                _playerBooks++;
+                _points += (_playerBooks*checkNum*_turn);
+                PrintBooks();
+            }
         }
         
         //CHECK WHO WON, DISPLAY VICTORY & RECORD LOGS
