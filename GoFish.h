@@ -157,6 +157,21 @@ public:
         //CHECK FOR BOOKS
     }
     
+    void ResetDecks(){
+        _GameDeck->CardDeck.clear();
+        _PlayerDeck->CardDeck.clear();
+        _EnemyDeck->CardDeck.clear();
+        _Pile->CardDeck.clear();
+        
+        _GameDeck->Shuffle();
+        
+        //HAND BOTH DECKS '_PLAYER_HANDSIZE' RANDOM CARDS EACH
+        for(int i = 0; i < _PLAYER_HANDSIZE; ++i){
+            TakeFromDeck(_GameDeck, _PlayerDeck, _GameDeck->GetRandomCard(), 0);
+            TakeFromDeck(_GameDeck, _EnemyDeck, _GameDeck->GetRandomCard(), 0);
+        }
+    }
+    
     void PrintBooks(){
         std::cout << 
                 "Player Books:  " << _playerBooks <<
@@ -172,14 +187,22 @@ public:
     void DisplayVictory(){
         if(_playerBooks > _enemyBooks){
             //player won
-            //fstream
+            std::cout << "\nYOU WON!!!\nCONGRATULATIONS. Points: " << _points << "\n\n";
+            
+            _GameLogs << "Player Won.\nPoints: " << _points << '\n';
         }else if(_playerBooks < _enemyBooks){
             //enemy won
-            //fstream
+            std::cout << "\nYOU LOST!\nBETTER LUCK NEXT TIME. Points: " << _points << "\n\n";
+            
+            _GameLogs << "Enemy Won.\n";
         }else{
             //tied
-            //fstream
+            std::cout << "\nTIED GAME!\nRARE OCCURANCE. Points: " << _points << "\n\n";
+            
+            _GameLogs << "Tied Game.\nPoints: " << _points << '\n';
         }
+        
+        _GameLogs.close();
     }
     
     void MainMenu(){
@@ -219,25 +242,20 @@ public:
     //GAMEPLAY LOOP
     void StartGame(){
         std::cout << "\nStarting Game...\n\n";
-        //CHECK IF DECK HAS BEEN CREATED, IF NOT CREATE IT & SHUFFLE IT
-        if(_GameDeck->Size() == 0) _GameDeck->CreateRandomDeck();
-        _GameDeck->Shuffle();
+        _GameLogs << "\nGame Session Started : " << ymd;
+        
+        //RESET DECKS TO ENSURE NO BUGS
+        ResetDecks();
         
         //INITIALIZE 'checkNum' WITH -1 SO YOU CANT ACCIDENTLY WIN A BOOK OFF START
         int checkNum = -1;
-
-        //HAND BOTH DECKS 4 RANDOM CARDS EACH
-        for(int i = 0; i < _PLAYER_HANDSIZE; ++i){
-            TakeFromDeck(_GameDeck, _PlayerDeck, _GameDeck->GetRandomCard(), 0);
-            TakeFromDeck(_GameDeck, _EnemyDeck, _GameDeck->GetRandomCard(), 0);
-        }
         
         //CHECK FOR GAME CONDITIONS IN WHILE LOOP
-        while(_GameDeck->Size() > 0){
-            PromptTurn(_turn++, checkNum);
-        }
+        //while(_GameDeck->Size() > 0){
+        //    PromptTurn(_turn++, checkNum);
+        //}
         
-        //CHECK WHO WON
+        //CHECK WHO WON, DISPLAY VICTORY & RECORD LOGS
         DisplayVictory();
     }
     
@@ -266,8 +284,7 @@ private:
     
     bool _gameStarted = false;
     
-    ofstream MyFile("gameLogs.txt");
-    MyFile << "\nGame Session Started : " << ymd;
+    std::ofstream _GameLogs("gameLogs.txt");
 };
 
 
