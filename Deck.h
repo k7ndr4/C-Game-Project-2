@@ -45,19 +45,19 @@ public:
             }
             
             bool operator>(const Deck::Card& card2){
-                return card2._number > this->_number;
+                return this->_number > card2._number;
             }
             
             bool operator<(const Deck::Card& card2){
-                return card2._number < this->_number;
+                return this->_number < card2._number;
             }
             
             bool operator>=(const Deck::Card& card2){
-                return card2._number >= this->_number;
+                return this->_number >= card2._number;
             }
             
             bool operator<=(const Deck::Card& card2){
-                return card2._number <= this->_number;
+                return this->_number <= card2._number;
             }
             
             inline std::string name(){ return numToVal() + _suite; }
@@ -171,10 +171,6 @@ private:
         " of Clubs", 
         " of Diamonds" 
     };
-    
-    
-    //FUNCTIONS
-    //check deck for number of card type (int num) => num occur.
 };
 
 

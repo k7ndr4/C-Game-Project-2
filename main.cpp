@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
     //GAME MANAGER
     GoFish GameManager(GameDeck, PlayerDeck, EnemyDeck, Pile);
     
-    GameManager.StartGame();
+    GameManager.MainMenu();
     
     return 0;
 }
