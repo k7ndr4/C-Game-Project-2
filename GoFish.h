@@ -17,6 +17,7 @@
 #include <chrono>
 #include <thread>
 #include <fstream>
+#include <ctime>
 
 class GoFish{
 public:
@@ -25,6 +26,8 @@ public:
         _PlayerDeck = PlayerDeck;
         _EnemyDeck = EnemyDeck;
         _Pile = Pile;
+        
+        _GameLogs.open("logs.txt");
     }
     
     ~GoFish(){
@@ -32,6 +35,8 @@ public:
         delete _PlayerDeck;
         delete _EnemyDeck;
         delete _Pile;
+        
+        _GameLogs.close();
     }
     
     //CHECKS THE WIN CONDITION
@@ -92,7 +97,7 @@ public:
     
     //GAMEPLAY TURN
     void PromptTurn(int turn, int& checkNum){
-        std::this_thread::sleep_for(std::chrono::milliseconds(250));
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
         std::cout << "\n----TURN " << turn << " ----\n";
         _PlayerDeck->Sort();
         
@@ -163,11 +168,15 @@ public:
         //CHECK FOR BOOKS
     }
     
-    void ResetDecks(){
+    void Reset(){
         _GameDeck->CardDeck.clear();
         _PlayerDeck->CardDeck.clear();
         _EnemyDeck->CardDeck.clear();
         _Pile->CardDeck.clear();
+        
+        _points = 0;
+        _playerBooks = 0;
+        _enemyBooks  = 0;
         
         _GameDeck->CreateRandomDeck();
         _GameDeck->Shuffle();
@@ -196,20 +205,21 @@ public:
             //player won
             std::cout << "\nYOU WON!!!\nCONGRATULATIONS. Points: " << _points << "\n\n";
             
-            //_GameLogs << "Player Won.\nPoints: " << _points << '\n';
+            _GameLogs << "Player Won.\nPoints: " << _points << '\n';
         }else if(_playerBooks < _enemyBooks){
             //enemy won
             std::cout << "\nYOU LOST!\nBETTER LUCK NEXT TIME. Points: " << _points << "\n\n";
             
-            //_GameLogs << "Enemy Won.\n";
+            _GameLogs << "Enemy Won.\n";
         }else{
             //tied
             std::cout << "\nTIED GAME!\nRARE OCCURANCE. Points: " << _points << "\n\n";
             
-            //_GameLogs << "Tied Game.\nPoints: " << _points << '\n';
+            _GameLogs << "Tied Game.\nPoints: " << _points << '\n';
         }
         
-        //_GameLogs.close();
+        //FLUSH THE BUFFER
+        _GameLogs << std::endl;
     }
     
     void MainMenu(){
@@ -249,10 +259,10 @@ public:
     //GAMEPLAY LOOP
     void StartGame(){
         std::cout << "\nStarting Game...\n\n";
-        //_GameLogs << "\nGame Session Started : " << ymd;
+        _GameLogs << "\nGame Session Started : " << ymd;
         
         //RESET DECKS TO ENSURE NO BUGS
-        ResetDecks();
+        Reset();
         
         //INITIALIZE 'checkNum' WITH -1 SO YOU CANT ACCIDENTLY WIN A BOOK OFF START
         int checkNum = -1;
@@ -277,14 +287,16 @@ public:
     }
     
     //STILL NEED TO IMPLEMENT:
-    //BINARY SEARCH/LINEAR SEARCH, BUBBLE SORT, SELECTION SORT, TYPE CASTING, VALIDATING USER INPUT, OSTREAM, 
+    //BINARY SEARCH/LINEAR SEARCH, BUBBLE SORT, SELECTION SORT, TYPE CASTING, VALIDATING USER INPUT, 
     //STATIC VARS, 1D ARRAY, PARALLEL ARRAY, FUNC(1D ARRAY), 2D ARRAY, USE OF CMATH LIBRARY
     //MOVE ALL HEADER FUNCTIONS TO .CPP FILES
     
 private:
-    //const std::chrono::time_point now{std::chrono::system_clock::now()};
-    //const std::chrono::year_month_day ymd{std::chrono::floor<std::chrono::days>(now)};
-    
+     time_t now = time(0);
+   
+    // convert now to string form
+    char* date = ctime(&now);
+   
     const int _FOUROFKIND = 4;
     const int _PLAYER_HANDSIZE = 7;
     
@@ -301,7 +313,7 @@ private:
     
     bool _gameStarted = false;
     
-    //std::ofstream _GameLogs("gameLogs.txt");
+    std::ofstream _GameLogs{};
 };
 
 
