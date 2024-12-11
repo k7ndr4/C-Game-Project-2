@@ -117,7 +117,7 @@ public:
     void CreateRandomDeck(){
         for(int i = 0; i < 4; ++i){
             for(int j = 1; j <= 13; ++j){
-                CardDeck.emplace_back(j, SUITES.at(i));
+                CardDeck.emplace_back(j, SUITES[i]);
             }
         }
     }
@@ -165,7 +165,7 @@ public:
 private:
     int _size{};
     
-    const std::vector<std::string> SUITES = { 
+    const std::string SUITES[4] = { 
         " of Spades", 
         " of Hearts", 
         " of Clubs", 

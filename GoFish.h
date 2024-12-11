@@ -27,7 +27,7 @@ public:
         _EnemyDeck = EnemyDeck;
         _Pile = Pile;
         
-        _GameLogs.open("logs.txt");
+        _GameLogs.open("logs.txt",std::fstream::app);
     }
     
     ~GoFish(){
@@ -109,15 +109,14 @@ public:
             DisplayHand(_PlayerDeck);
             std::cout << "\nIt's your turn! Enter a card number that you want to fish for: ";
             
-            char num{};
-            std::cin >> num;
-            
             //USER VALIDATION
-            if(num > 13) num = 13;
-            else if(num < 1) num = 1;
-
-            if(isdigit(num)) checkNum = num;
-            else checkNum = 1;
+            while (!(std::cin >> checkNum)) {
+                std::cout << "Invalid input. Please enter an integer: ";
+                std::cin.clear(); 
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            }
+            if(checkNum > 13) checkNum = 13;
+            else if(checkNum < 1) checkNum = 1;
             
             //TAKE THE REQUESTED CARD
             if(!WhileTakeFromDeck(_EnemyDeck, _PlayerDeck, checkNum)){
@@ -259,7 +258,7 @@ public:
     //GAMEPLAY LOOP
     void StartGame(){
         std::cout << "\nStarting Game...\n\n";
-        _GameLogs << "\nGame Session Started : " << ymd;
+        _GameLogs << "\nGame Session Started : " << date << std::endl;
         
         //RESET DECKS TO ENSURE NO BUGS
         Reset();
@@ -287,32 +286,35 @@ public:
     }
     
     //STILL NEED TO IMPLEMENT:
-    //BINARY SEARCH/LINEAR SEARCH, BUBBLE SORT, SELECTION SORT, TYPE CASTING, VALIDATING USER INPUT, 
+    //BINARY SEARCH/LINEAR SEARCH, BUBBLE SORT, SELECTION SORT, TYPE CASTING, 
     //STATIC VARS, 1D ARRAY, PARALLEL ARRAY, FUNC(1D ARRAY), 2D ARRAY, USE OF CMATH LIBRARY
     //MOVE ALL HEADER FUNCTIONS TO .CPP FILES
     
 private:
-     time_t now = time(0);
-   
-    // convert now to string form
+    //YMD
+    time_t now = time(0);
     char* date = ctime(&now);
    
+    //GAME RULES
     const int _FOUROFKIND = 4;
     const int _PLAYER_HANDSIZE = 7;
     
+    //GAME DECKS
     Deck* _GameDeck = nullptr;
     Deck* _PlayerDeck = nullptr;
-    Deck* _EnemyDeck = nullptr;
+    Deck* _EnemyDeck  = nullptr;
     Deck* _Pile = nullptr;
     
-    unsigned int _turn = 1;
+    //GAME STATS
+    unsigned int _turn = 1; //CURRENT TURN
     unsigned int _playerBooks = 0; //BOOKS ARE THE # OF 4 OF A KINDS
-    unsigned int _enemyBooks  = 0;
+    unsigned int _enemyBooks  = 0; 
     
     float _points = 0;
     
     bool _gameStarted = false;
     
+    //GAME LOGS
     std::ofstream _GameLogs{};
 };
 
