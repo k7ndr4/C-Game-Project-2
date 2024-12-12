@@ -48,16 +48,32 @@ public:
                 return this->_number > card2._number;
             }
             
+            bool operator>(const int num){
+                return this->_number > num;
+            }
+            
             bool operator<(const Deck::Card& card2){
                 return this->_number < card2._number;
+            }
+            
+            bool operator<(const int num){
+                return this->_number < num;
             }
             
             bool operator>=(const Deck::Card& card2){
                 return this->_number >= card2._number;
             }
             
+            bool operator>=(const int num){
+                return this->_number >= num;
+            }
+            
             bool operator<=(const Deck::Card& card2){
                 return this->_number <= card2._number;
+            }
+            
+            bool operator<=(const int num){
+                return this->_number <= num;
             }
             
             inline std::string name(){ return numToVal() + _suite; }
@@ -105,8 +121,6 @@ public:
         return *this;
     }
     
-    
-    
     //THE DECK ITSELF
     std::vector<Deck::Card> CardDeck{};
     
@@ -137,12 +151,53 @@ public:
         }
     }
     
+    void bublSrt(){
+        for(int max = CardDeck.size() - 1; max > 0; max --){
+            for(int index = 0; index < max; index++){
+                if(CardDeck[index] > CardDeck[index + 1])
+                    std::swap(CardDeck[index], CardDeck[index + 1]);
+            }
+        }
+    }
+    
+    void selSrt(){
+        int minIndex, minValue;
+
+        for(int i = 0; i < (CardDeck.size() - 1); i++){
+            minIndex = i;
+            minValue = CardDeck[i].num();
+
+            for(int index = i + 1; index < CardDeck.size(); index++){
+                if(CardDeck[index].num() < minValue){
+                    minValue = CardDeck[index].num();
+                    minIndex = index;
+                }
+            }
+            std::swap(CardDeck[minIndex],CardDeck[i]);
+        }
+    }
+    
+    int linSrch(int val){
+        int index = -1;
+        for(int i = 0; i < CardDeck.size(); i++){
+            if(CardDeck.at(i) == val){
+                index = i;
+                return index;
+            }
+        }
+        return index;
+    }
+    
     void Shuffle(){
         std::shuffle(CardDeck.begin(), CardDeck.end(), std::default_random_engine(time(0)));
     }
     
-    void Sort(){
-        std::sort(CardDeck.begin(), CardDeck.end());
+    void Sort(int type = 0){
+        //std::sort(CardDeck.begin(), CardDeck.end());
+        if(type == 0)
+            bublSrt();
+        else
+            selSrt();
     }
     
     Deck::Card GetRandomCard(){
@@ -150,7 +205,7 @@ public:
     }
     
     Deck::Card ReturnAndRemove(int num){
-        if(std::find(CardDeck.begin(), CardDeck.end(), num) != CardDeck.end()){
+        if(linSrch(num) != -1){
             Deck::Card card = CardDeck.at(std::distance(CardDeck.begin(), std::find(CardDeck.begin(), CardDeck.end(), num)));
             
             if(std::find(CardDeck.begin(), CardDeck.end(), card) != CardDeck.end())

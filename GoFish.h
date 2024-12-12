@@ -99,7 +99,10 @@ public:
     void PromptTurn(int turn, int& checkNum){
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
         std::cout << "\n----TURN " << turn << " ----\n";
-        _PlayerDeck->Sort();
+        
+        //SORT BOTH DECKS TO MAKE IT EASIER TO SEARCH THRU
+        _PlayerDeck->Sort(0);
+        _EnemyDeck->Sort(1);
         
         //TURNS WILL BE DECIDED BASED ON MODULUS 2
         //i.e EVEN TURNS WILL BE THE ENEMY TURN, ODD WILL BE PLAYER
