@@ -233,6 +233,8 @@ void GoFish::DisplayRules(){
             "The cards used to gain a 'book' will be removed from your hand.\n" << ""
             "Each turn you will ask your opponent for a type of card. If they have this type of card, they must\n" <<
             "give you all cards of that type. (i.e You ask for 7's, and the opponent has 3 7's. They must give you all 3, and vice versa.)\n" <<
+            "Face cards are asked for in ascending order after 10 with the exception of Ace which is 1. (Ace =1, Jack = 11, Queen = 12, King = 13)\n" <<
+            "If you ask for a number below 1, the game will assume you asked for 1's. If you ask for a number above 13, the game will assume you asked for 13's.\n" <<
             "The game will end once the entire game deck has run out of cards to fish from.\n" <<
             "The winner will be determined by who has more books. Points are determined by (the rank of your card * the amount of books you have * the current turn).\n" <<
             "Points will be displayed at the end of the game.\n";
