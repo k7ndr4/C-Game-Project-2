@@ -97,15 +97,17 @@ public:
     };
     
     Deck(int size){
-        //call some function to create cards based on a const array of numbers&suites
         _size = size;
         CardDeck.reserve(size);
     }
     
     Deck(){
-        //call some function to create cards based on a const array of numbers&suites
         _size = 52;
         CardDeck.reserve(52);
+    }
+    
+    Deck(bool create){
+        if(create) CreateRandomDeck(_SUITES);
     }
     
     Deck& operator +=(Deck::Card card){
@@ -128,99 +130,24 @@ public:
     inline int Size(){ return CardDeck.size(); }
     
     //PUBLIC FUNCS
-    void CreateRandomDeck(){
-        for(int i = 0; i < 4; ++i){
-            for(int j = 1; j <= 13; ++j){
-                CardDeck.emplace_back(j, SUITES[i]);
-            }
-        }
-    }
-    
-    void PrintDeck(int format = 1){
-        switch(format){
-            case 1: 
-                for(Deck::Card &card: CardDeck){
-                    std::cout << card.name() << '\n';
-                }
-                break;
-            
-            case 2: 
-                for(Deck::Card &card: CardDeck){
-                    std::cout << card.name() << ", ";
-                }
-        }
-    }
-    
-    void bublSrt(){
-        for(int max = CardDeck.size() - 1; max > 0; max --){
-            for(int index = 0; index < max; index++){
-                if(CardDeck[index] > CardDeck[index + 1])
-                    std::swap(CardDeck[index], CardDeck[index + 1]);
-            }
-        }
-    }
-    
-    void selSrt(){
-        int minIndex, minValue;
+    void CreateRandomDeck();
+    void CreateRandomDeck(const std::string SUITES[]);
+    void PrintDeck(int format);
+    void bublSrt();
+    void selSrt();
 
-        for(int i = 0; i < (CardDeck.size() - 1); i++){
-            minIndex = i;
-            minValue = CardDeck[i].num();
-
-            for(int index = i + 1; index < CardDeck.size(); index++){
-                if(CardDeck[index].num() < minValue){
-                    minValue = CardDeck[index].num();
-                    minIndex = index;
-                }
-            }
-            std::swap(CardDeck[minIndex],CardDeck[i]);
-        }
-    }
+    int linSrch(int val);
     
-    int linSrch(int val){
-        int index = -1;
-        for(int i = 0; i < CardDeck.size(); i++){
-            if(CardDeck.at(i) == val){
-                index = i;
-                return index;
-            }
-        }
-        return index;
-    }
+    void Shuffle();
+    void Sort(int type);
     
-    void Shuffle(){
-        std::shuffle(CardDeck.begin(), CardDeck.end(), std::default_random_engine(time(0)));
-    }
-    
-    void Sort(int type = 0){
-        //std::sort(CardDeck.begin(), CardDeck.end());
-        if(type == 0)
-            bublSrt();
-        else
-            selSrt();
-    }
-    
-    Deck::Card GetRandomCard(){
-        return CardDeck.at(rand()% CardDeck.size());
-    }
-    
-    Deck::Card ReturnAndRemove(int num){
-        if(linSrch(num) != -1){
-            Deck::Card card = CardDeck.at(std::distance(CardDeck.begin(), std::find(CardDeck.begin(), CardDeck.end(), num)));
-            
-            if(std::find(CardDeck.begin(), CardDeck.end(), card) != CardDeck.end())
-                CardDeck.erase(std::find(CardDeck.begin(), CardDeck.end(), card));
-            
-            return card;
-        }
-        Deck::Card errorCard;
-        return errorCard;
-    }
+    Deck::Card GetRandomCard();
+    Deck::Card ReturnAndRemove(int num);
     
 private:
     int _size{};
     
-    const std::string SUITES[4] = { 
+    inline const static std::string _SUITES[4] = { 
         " of Spades", 
         " of Hearts", 
         " of Clubs", 

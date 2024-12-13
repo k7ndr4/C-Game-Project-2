@@ -1,107 +1,14 @@
-
-Game Session Started : Tue Dec 10 18:46:39 2024
-
-Player Won.
-Points: 111581
-
-
-Game Session Started : Tue Dec 10 18:47:58 2024
+Game Session Started : Thu Dec 12 17:01:47 2024
 
 Enemy Won.
+Session Stats:
+Player Wins: 1424924896
+Game 0, you had: 10250 points. The enemy had: 19066 points.
 
-
-Game Session Started : Tue Dec 10 18:47:58 2024
-
-Player Won.
-Points: 133499
-
-
-Game Session Started : Tue Dec 10 18:47:58 2024
-
-
-Game Session Started : Tue Dec 10 18:53:19 2024
-
-
-Game Session Started : Tue Dec 10 18:53:58 2024
-
-
-Game Session Started : Tue Dec 10 18:56:16 2024
-
-
-Game Session Started : Tue Dec 10 18:57:27 2024
-
-
-Game Session Started : Tue Dec 10 18:59:37 2024
-
-
-Game Session Started : Tue Dec 10 19:00:12 2024
-
-
-Game Session Started : Tue Dec 10 19:00:53 2024
-
-
-Game Session Started : Tue Dec 10 19:01:33 2024
-
-
-Game Session Started : Tue Dec 10 19:02:09 2024
-
-
-Game Session Started : Tue Dec 10 19:03:16 2024
-
-
-Game Session Started : Tue Dec 10 19:03:37 2024
-
-
-Game Session Started : Tue Dec 10 19:08:20 2024
-
-
-Game Session Started : Tue Dec 10 19:30:07 2024
+Game Session Started : Thu Dec 12 17:03:44 2024
 
 Player Won.
-Points: 46431
-
-
-Game Session Started : Thu Dec 12 15:20:23 2024
-
-
-Game Session Started : Thu Dec 12 15:20:57 2024
-
-
-Game Session Started : Thu Dec 12 15:21:25 2024
-
-
-Game Session Started : Thu Dec 12 15:22:38 2024
-
-
-Game Session Started : Thu Dec 12 15:23:19 2024
-
-
-Game Session Started : Thu Dec 12 15:24:58 2024
-
-
-Game Session Started : Thu Dec 12 15:26:04 2024
-
-
-Game Session Started : Thu Dec 12 15:28:37 2024
-
-
-Game Session Started : Thu Dec 12 15:29:57 2024
-
-
-Game Session Started : Thu Dec 12 15:30:36 2024
-
-
-Game Session Started : Thu Dec 12 15:32:18 2024
-
-
-Game Session Started : Thu Dec 12 15:33:52 2024
-
-
-Game Session Started : Thu Dec 12 15:34:15 2024
-
-
-Game Session Started : Thu Dec 12 15:37:14 2024
-
-
-Game Session Started : Thu Dec 12 15:37:34 2024
-
+Points: 10489
+Session Stats:
+Player Wins: 1
+Game 1, you had: 10489 points. The enemy had: 10652 points.

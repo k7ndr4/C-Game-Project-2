@@ -14,6 +14,8 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>Deck.cpp</itemPath>
+      <itemPath>GoFish.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -38,7 +40,11 @@
       </toolsSet>
       <compileType>
       </compileType>
+      <item path="Deck.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="Deck.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GoFish.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="GoFish.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -65,7 +71,11 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="Deck.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="Deck.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GoFish.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="GoFish.h" ex="false" tool="3" flavor2="0">
       </item>

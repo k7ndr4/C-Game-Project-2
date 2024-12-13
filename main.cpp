@@ -22,8 +22,7 @@ int main(int argc, char** argv) {
     srand(time(0));
     
     //MAKE THE GAME DECK
-    Deck* GameDeck = new Deck;
-    GameDeck->CreateRandomDeck();
+    Deck* GameDeck = new Deck(true);
     //GameDeck.PrintDeck();
     
     //PLAYER DECK, ENEMY DECK, & PILE
@@ -34,6 +33,7 @@ int main(int argc, char** argv) {
     //GAME MANAGER
     GoFish GameManager(GameDeck, PlayerDeck, EnemyDeck, Pile);
     
+    //START THE MAIN MENU
     GameManager.MainMenu();
     
     return 0;
