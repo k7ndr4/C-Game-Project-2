@@ -19,7 +19,7 @@ bool GoFish::CheckFour(Deck* deck){
 
 void GoFish::LogSessionStats(){
     if(_SessionGameCount == 0) return;
-    _GameLogs << "Session Stats:\nPlayer Wins: " << _SessionWtoL[0][0] << '\n';
+    _GameLogs << "Session Stats:\nPlayer '" << _playerName << "' Wins: " << _SessionWtoL[0][0] << '\n';
 
     for(int  i = 0; i < _SessionGameCount; ++i){
         _GameLogs << "Game " << i+1 << ", you had: " << _SessionPlayerPoints[i] << " points. The enemy had: " << _SessionEnemyPoints[i] << " points.\n";
@@ -88,8 +88,8 @@ void GoFish::PromptTurn(int turn, int& checkNum){
             std::cin.clear(); 
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
-        if(checkNum > 13) checkNum = 13;
-        else if(checkNum < 1) checkNum = 1;
+        checkNum > 13 ? checkNum = 13 : checkNum = checkNum;
+        checkNum < 1  ? checkNum = 1  : checkNum = checkNum;
 
         //TAKE THE REQUESTED CARD
         if(!WhileTakeFromDeck(_EnemyDeck, _PlayerDeck, checkNum)){
@@ -242,6 +242,8 @@ void GoFish::DisplayRules(){
 
 //GAMEPLAY LOOP
 void GoFish::StartGame(){
+    std::cout << "\nPlease enter your name: ";
+    std::cin  >> _playerName;
     std::cout << "\nStarting Game...\n\n";
     _GameLogs << "\nGame Session Started : " << date << std::endl;
 

@@ -100,5 +100,6 @@ private:
     int _SessionGameCount = 0; //NUMBER OF GAMES PLAYED IN THIS SESSION
     int _SessionPlayerPoints[10]; //SESSION POINTS, INDEX INDICATES GAME
     int _SessionEnemyPoints[10];
+    std::string _playerName{}; //PLAYER NAME
 };
 #endif /* GOFISH_H */
