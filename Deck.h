@@ -97,12 +97,10 @@ public:
     };
     
     Deck(int size){
-        _size = size;
         CardDeck.reserve(size);
     }
     
     Deck(){
-        _size = 52;
         CardDeck.reserve(52);
     }
     
@@ -145,8 +143,6 @@ public:
     Deck::Card ReturnAndRemove(int num);
     
 private:
-    int _size{};
-    
     inline const static std::string _SUITES[4] = { 
         " of Spades", 
         " of Hearts", 
