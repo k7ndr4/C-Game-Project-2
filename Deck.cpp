@@ -33,6 +33,8 @@ void Deck::PrintDeck(int format = 1){
 }
 
 void Deck::bublSrt(){
+    if(CardDeck.size() == 0) return;
+    
     for(int max = CardDeck.size() - 1; max > 0; max --){
         for(int index = 0; index < max; index++){
             if(CardDeck[index] > CardDeck[index + 1])
@@ -42,6 +44,7 @@ void Deck::bublSrt(){
 }
 
 void Deck::selSrt(){
+    if(CardDeck.size() == 0) return;
     int minIndex, minValue;
 
     for(int i = 0; i < (CardDeck.size() - 1); i++){
@@ -82,7 +85,7 @@ void Deck::Sort(int type = 0){
 }
 
 Deck::Card Deck::GetRandomCard(){
-    return CardDeck.at(rand()% CardDeck.size());
+    return CardDeck[rand()% CardDeck.size()];
 }
 
 Deck::Card Deck::ReturnAndRemove(int num){

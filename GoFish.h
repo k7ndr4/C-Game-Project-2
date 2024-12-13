@@ -45,7 +45,7 @@ public:
     bool CheckFour(Deck* deck, int num);
     
     //CHECKS WIN CONDITION
-    bool CheckFour(Deck* deck);
+    bool CheckFour(int& check, Deck* deck);
     
     //LOG SESSION STATS
     void LogSessionStats();

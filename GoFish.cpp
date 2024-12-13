@@ -7,10 +7,11 @@ bool GoFish::CheckFour(Deck* deck, int num){
 }
 
 //CHECKS WIN CONDITION
-bool GoFish::CheckFour(Deck* deck){
+bool GoFish::CheckFour(int& check, Deck* deck){
     //CHECKS FOR 4 OF ALL NUMBERS
     for(int i = 1; i <= 13; i++){
-        if( std::count(deck->CardDeck.begin(), deck->CardDeck.end(), i) == _FOUROFKIND){
+        if(std::count(deck->CardDeck.begin(), deck->CardDeck.end(), i) == _FOUROFKIND){
+            check = i;
             return true;
         }
     }
@@ -101,10 +102,11 @@ void GoFish::PromptTurn(int turn, int& checkNum){
         }
 
         //CHECK FOR BOOKS
-        if(CheckFour(_PlayerDeck)){
-            std::cout << "\nYou have 4 " << checkNum << "'s! These cards will be removed from your hand, and your # of books will go up by 1.\n";
+        int check{};
+        while(CheckFour(check, _PlayerDeck)){
+            std::cout << "\nYou have 4 " << check << "'s! These cards will be removed from your hand, and your # of books will go up by 1.\n";
 
-            WhileTakeFromDeck(_PlayerDeck, _Pile, checkNum);
+            WhileTakeFromDeck(_PlayerDeck, _Pile, check);
             _playerBooks++;
             _playerPoints += abs((static_cast<float>(_playerBooks)*checkNum*_turn));
             PrintBooks();
@@ -127,11 +129,12 @@ void GoFish::PromptTurn(int turn, int& checkNum){
             Deck::Card tempCard = _GameDeck->GetRandomCard();
             TakeFromDeck(_GameDeck, _EnemyDeck, tempCard, 0);
         }
+        
+        int check{};
+        while(CheckFour(check, _EnemyDeck)){
+            std::cout << "\nYour opponent has 4 " << check << "'s! These cards will be removed from their hand, and their # of books will go up by 1.\n";
 
-        if(CheckFour(_EnemyDeck)){
-            std::cout << "\nYour opponent has 4 " << enemyFish << "'s! These cards will be removed from their hand, and their # of books will go up by 1.\n";
-
-            WhileTakeFromDeck(_EnemyDeck, _Pile, enemyFish);
+            WhileTakeFromDeck(_EnemyDeck, _Pile, check);
             _enemyBooks++;
             _enemyPoints += abs((static_cast<float>(_enemyBooks)*enemyFish*_turn));
 
