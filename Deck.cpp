@@ -97,4 +97,3 @@ Deck::Card Deck::ReturnAndRemove(int num){
     Deck::Card errorCard;
     return errorCard;
 }
-

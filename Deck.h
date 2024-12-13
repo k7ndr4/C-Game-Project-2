@@ -154,7 +154,4 @@ private:
         " of Diamonds" 
     };
 };
-
-
 #endif /* DECK_H */
-
