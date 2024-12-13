@@ -68,7 +68,7 @@ bool GoFish::WhileTakeFromDeck(Deck* from, Deck* to, int num){
 //GAMEPLAY TURN
 void GoFish::PromptTurn(int turn, int& checkNum){
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    std::cout << "\n----TURN " << turn << " ----\n";
+    std::cout << "\n" << std::setw(3) << "---TURN " << turn << " ----\n";
 
     //SORT BOTH DECKS TO MAKE IT EASIER TO SEARCH THRU
     _PlayerDeck->Sort(0);
