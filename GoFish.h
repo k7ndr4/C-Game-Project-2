@@ -100,7 +100,4 @@ private:
     int _SessionPlayerPoints[10]; //SESSION POINTS, INDEX INDICATES GAME
     int _SessionEnemyPoints[10];
 };
-
-
 #endif /* GOFISH_H */
-
